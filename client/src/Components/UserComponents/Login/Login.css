@@ -4,7 +4,7 @@
     width: 100%;
 }
 .border{
-    background-color: #C0C0C0;
+    background-color: #808080;
     border: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
 }
@@ -17,5 +17,9 @@
 }
 .placeHolder{
     color: #ffff;
+}
+.card{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+
 }
 

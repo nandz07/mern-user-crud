@@ -5,7 +5,7 @@ function Footer() {
   return (
     
     <footer>
-        <h1 className='footer1'>@adminPanel</h1>
+        <h6 className='footer1 text-white'>Copyright &copy; Admin</h6>
     </footer>
     
   )

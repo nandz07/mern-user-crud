@@ -1,5 +1,7 @@
 .adminHeadernav{
-    background-color: #030712;
+    background-color: #DCDCDC;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: #36454F;
   }
   
   .adminLogoutBtn{
@@ -9,5 +11,5 @@
     width: 70px;
     height: 35px;
    background-color: transparent;
-    color: white;
+    color: #36454F;
   }

@@ -7,6 +7,7 @@ import AdminPage1 from './Pages/AdminPages/AdminPage1'
 import AdminDash from './Components/AdminComponents/Dashboard/AdminDash'
 import Usermanagement from './Components/AdminComponents/Users/Usermanagement'
 import AdminaddUsers from './Components/AdminComponents/Users/AdminaddUsers'
+import UpdateUser from './Components/AdminComponents/Users/UpdateUser'
 
 
 
@@ -29,10 +30,10 @@ function App() {
 
         <Route path='/admin' element={<AdminPage1 />} />
 
-        <Route path='/adminHome' element={<AdminDash />} />
-        <Route path='/users' element={<Usermanagement />} />
-        <Route path='/adminAddUser' element={<AdminaddUsers/>}/>
-        {/* <Route path='/updateUser/:id' element={<UpdateUser/>} /> */}
+        <Route path='/admin/dashboard' element={<AdminDash />} />
+        <Route path='/admin/users' element={<Usermanagement />} />
+        <Route path='/admin/adminAddUser' element={<AdminaddUsers/>}/>
+        <Route path='/admin/updateUser/:id' element={<UpdateUser/>} />
 
 
       </Routes>
