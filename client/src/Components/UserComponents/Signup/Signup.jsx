@@ -104,7 +104,7 @@ function Signup() {
                     />
                 </Form.Group>
                 <div className="d-grid gap-2 mt-3">
-                    <Button type='submit' variant="outline-secondary" >
+                    <Button type='submit' variant="outline-light" >
                         Register
                     </Button>
                     <Link to='/' className='link'>Already have an account</Link>

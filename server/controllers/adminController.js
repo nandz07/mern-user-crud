@@ -7,14 +7,34 @@ module.exports = {
             let adminData = req.body
             let adminEmail = "admin@gmail.com"
             let adminPassword = "123123"
+            const token = jwt.sign({
+                adminEmail: "admin@gmail.com"
+            },
+                process.env.SECRET,
+                {
+                    expiresIn: "7d"
+                }
+            )
             if (adminData.email == adminEmail && adminData.password == adminPassword) {
-                res.json({ status: true, admin: true })
+                res.json({ status: true, admin: true ,admin:token})
             } else {
                 res.json({ status: false, message: "invalid Email or Password" });
             }
         } catch (error) {
             res.json({ status: "login Catch error" })
             console.log("adminLogin catch error" + error);
+        }
+    },
+    verifyAdminToken:async (req,res)=>{
+        try {
+            const decodeToken=jwt.verify(req.body.token,process.env.SECRET)
+            if(decodeToken.adminEmail==='admin@gmail.com'){
+                return res.status(200).json({message:"token valid",token:true})
+            }else{
+                return res.status(500).json({message:"token not valid",token:false})
+            }
+        } catch (error) {
+            console.log(error);
         }
     },
     getAllUsers: async (req, res) => {

@@ -1,13 +1,32 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import Footer from '../Footer/Footer'
 // import { Link } from 'react-router-dom'
 import AdminHeader from '../Header/AdminHeader'
 import './AdminDash.css'
 import { Button, Card } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
+import axios from '../../../utils/axios';
+import { verifyAdminTokenn } from '../../../utils/Constants'
+import toast from 'react-hot-toast'
 
-function AdminDash() {
+function  AdminDash () {
     const navigate = useNavigate()
+    useEffect(()=>{
+        const token=localStorage.getItem('adminToken')
+        if(!token){
+            navigate('/admin')
+        }else{
+            const body=JSON.stringify({token})
+            axios.post(verifyAdminTokenn,body,{headers:{"Content-Type":"application/json"}}).then((response)=>{
+                if(!response.data.token){
+                    toast.error(response.data.message)
+                    navigate('/admin')
+                }else{
+                    toast.success(response.data.message)
+                }
+            })
+        }
+    })
     return (
         <>
             <Fragment >

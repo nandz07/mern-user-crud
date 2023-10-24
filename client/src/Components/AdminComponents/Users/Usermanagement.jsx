@@ -7,7 +7,8 @@ import './users.css';
 import { Button, Card, Table } from 'react-bootstrap'; // Import Table from react-bootstrap
 import Swal from 'sweetalert2';
 import axios from '../../../utils/axios';
-import { adminDeleteUser, adminSearchUser, admingetAllusers } from '../../../utils/Constants';
+import { adminDeleteUser, adminSearchUser, admingetAllusers, verifyAdminTokenn } from '../../../utils/Constants';
+import toast from 'react-hot-toast';
 
 
 function Usermanagement() {
@@ -63,6 +64,23 @@ function Usermanagement() {
             }
         })
     }
+
+    useEffect(()=>{
+        const token=localStorage.getItem('adminToken')
+        if(!token){
+            navigate('/admin')
+        }else{
+            const body=JSON.stringify({token})
+            axios.post(verifyAdminTokenn,body,{headers:{"Content-Type":"application/json"}}).then((response)=>{
+                if(!response.data.token){
+                    toast.error(response.data.message)
+                    navigate('/admin')
+                }else{
+                    console.log(response.data.message)
+                }
+            })
+        }
+    },[navigate ])
 
     return (
         <>

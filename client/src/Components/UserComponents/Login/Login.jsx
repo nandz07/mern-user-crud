@@ -86,7 +86,7 @@ function Login() {
                     />
                 </Form.Group>
                 <div className="d-grid gap-2 mt-3">
-                    <Button variant="outline-secondary" type='submit' >
+                    <Button variant="outline-light" type='submit' >
                         Login
                     </Button>
                     <Link to='signup' className='link'>Create an account</Link>

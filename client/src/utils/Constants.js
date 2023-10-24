@@ -7,6 +7,7 @@ export const baseUrl = "http://localhost:4000";
 export const signUpPost='/signup'
 export const LoginPost='/login'
 export const verifyUserToken='/verifyUserToken'
+export const verifyAdminTokenn='/verifyAdminToken'
 export const imageUpload='/updateImage'
 export const Logout='/logout'
 // export const signUpPost='api/signup'

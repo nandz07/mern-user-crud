@@ -3,7 +3,7 @@ import { Card, Row } from 'react-bootstrap'
 import Footer from '../Footer/Footer'
 import AdminHeader from '../Header/AdminHeader'
 import { useNavigate, useParams } from 'react-router-dom'
-import { adminEditUser, adminUpdateUser } from '../../../utils/Constants'
+import { adminEditUser, adminUpdateUser, verifyAdminTokenn } from '../../../utils/Constants'
 import axios from '../../../utils/axios';
 import toast from 'react-hot-toast'
 
@@ -18,15 +18,29 @@ function UpdateUser() {
 
     
     useEffect(() => {
-        axios.get(`${adminEditUser}/${params.id}`).then((res) => {
-            console.log(res.data.userData);
-            setEmail(res.data.userData.email);
-            setUserName(res.data.userData.name);
-            setImage(res.data.userData.pic);
-        }).catch((err) => {
-            alert(err)
-        })
-    },[params.id])
+        const token=localStorage.getItem('adminToken')
+        if(!token){
+            navigate('/admin')
+        }else{
+            const body=JSON.stringify({token})
+            axios.post(verifyAdminTokenn,body,{headers:{"Content-Type":"application/json"}}).then((response)=>{
+                if(!response.data.token){
+                    toast.error(response.data.message)
+                    navigate('/admin')
+                }else{
+                    axios.get(`${adminEditUser}/${params.id}`).then((res) => {
+                        console.log(res.data.userData);
+                        setEmail(res.data.userData.email);
+                        setUserName(res.data.userData.name);
+                        setImage(res.data.userData.pic);
+                    }).catch((err) => {
+                        alert(err)
+                    })
+                }
+            })
+        }
+        
+    },[params.id,navigate])
 
     const updateUserDetails=async(e)=>{
         const body={userName:userName,email:email,id:params.id}

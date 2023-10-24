@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 // import './AdminLogin.css'
 import axios from '../../utils/axios';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function AdminLogin() {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -23,14 +23,15 @@ function AdminLogin() {
             toast.error('Email is required 🥺');
         } else if (!password.trim()) {
             toast.error('Password is required 🥺');
-        }else{
+        } else {
             try {
                 let response = await axios.post(adminPostLogin, body, { headers: { "Content-Type": "application/json" } });
                 console.log(response.data.status)
                 if (response.data.status === true) {
+                    localStorage.setItem('adminToken', response.data.admin)
                     navigate('/admin/dashboard');
                 } else {
-                    
+                    toast.error(response.data.message);
                 }
             } catch (error) {
                 console.log(error);
@@ -38,6 +39,14 @@ function AdminLogin() {
         }
 
     }
+    useEffect(() => {
+        const token = localStorage.getItem('adminToken');
+
+        if (token) {
+            navigate('/admin/dashboard');
+        }
+    })
+
     return (
         <>
             <div className='outer d-flex  justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
@@ -66,10 +75,10 @@ function AdminLogin() {
                     </Form.Group>
 
                     <div className="d-grid gap-2 mt-3">
-                    <Button variant="outline-secondary" type='submit' >
-                        Login
-                    </Button>
-                </div>
+                        <Button variant="outline-dark" type='submit' >
+                            Login
+                        </Button>
+                    </div>
                 </Form>
             </div>
         </>

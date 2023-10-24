@@ -1,12 +1,19 @@
 import React from 'react'
 import './AdminHeader.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 function AdminHeader() {
+const navigate=useNavigate()
+  const logoutHandle=(e)=>{
+    e.preventDefault()
+    localStorage.clear();
+    navigate('/admin')
+  }
   return (
     <>
     <nav class="navbar navbar-expand-lg adminHeadernav ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/adminHome" style={{color:""}} >WELCOME ADMIN</a>
+      <Link class="navbar-brand" to="/admin/dashboard" style={{color:""}} >WELCOME ADMIN</Link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -30,7 +37,7 @@ function AdminHeader() {
         </ul>
         <form class="d-flex" >
          
-          <button class="adminLogoutBtn" >Logout</button>
+          <button class="adminLogoutBtn" onClick={logoutHandle} >Logout</button>
         </form>
       </div>
     </div>

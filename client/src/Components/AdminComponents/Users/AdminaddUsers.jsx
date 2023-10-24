@@ -1,9 +1,9 @@
 import axios from '../../../utils/axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import toast from 'react-hot-toast';
 import {  useNavigate } from 'react-router-dom';
-import { signUpPost } from '../../../utils/Constants';
+import { signUpPost, verifyAdminTokenn } from '../../../utils/Constants';
 
 function AdminaddUsers() {
     const navigate = useNavigate();
@@ -43,6 +43,22 @@ function AdminaddUsers() {
             }
         }
     }
+    useEffect(()=>{
+        const token=localStorage.getItem('adminToken')
+        if(!token){
+            navigate('/admin')
+        }else{
+            const body=JSON.stringify({token})
+            axios.post(verifyAdminTokenn,body,{headers:{"Content-Type":"application/json"}}).then((response)=>{
+                if(!response.data.token){
+                    toast.error(response.data.message)
+                    navigate('/admin')
+                }else{
+                    toast.success(response.data.message)
+                }
+            })
+        }
+    })
 
     return (
         <div className='outer d-flex  justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
