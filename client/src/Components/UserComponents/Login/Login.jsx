@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Login.css'
-import {  Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { LoginPost } from '../../../utils/Constants';
 import axios from '../../../utils/axios';
 import toast from 'react-hot-toast';
+import { motion } from 'framer-motion'
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ function Login() {
             toast.error('Email is required 🥺');
         } else if (!password.trim()) {
             toast.error('Password is required 🥺');
-        }else{
+        } else {
             try {
                 // alert(LoginPost)
                 let user = await axios.post(LoginPost, body, { headers: { "Content-Type": "application/json" } })
@@ -32,11 +33,11 @@ function Login() {
                     navigate('/home');
                     toast('Welcome !', {
                         icon: '😍😍😍',
-                      });
+                    });
                 } else {
                     toast.error(user.data.error, {
                         icon: '🥺',
-                      });
+                    });
                 }
 
 
@@ -58,43 +59,49 @@ function Login() {
 
     return (
 
+        <motion.div
 
-        <div className='outer d-flex  justify-content-center align-items-center' style={{
-            minHeight: '100vh',
-        }}>
-            <Form className='border p-4  rounded'
-                onSubmit={handleSubmit}
-            >
-                <h2 className='text-white'>Login</h2>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Enter email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <div className='outer d-flex  justify-content-center align-items-center' style={{
+                minHeight: '100vh',
+            }}>
+                <Form className='border p-4  rounded'
+                    onSubmit={handleSubmit}
+                >
+                    <h2 className='text-white'>Login</h2>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <div className="d-grid gap-2 mt-3">
-                    <Button variant="outline-dark" type='submit' >
-                        Login
-                    </Button>
-                    <Link to='signup' className='link'>Create an account</Link>
-                </div>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Form.Group>
+                    <div className="d-grid gap-2 mt-3">
+                        <Button variant="outline-dark" type='submit' >
+                            Login
+                        </Button>
+                        <Link to='signup' className='link'>Create an account</Link>
+                    </div>
 
-            </Form>
-        </div>
-
+                </Form>
+            </div>
+        </motion.div>
     )
 }
 

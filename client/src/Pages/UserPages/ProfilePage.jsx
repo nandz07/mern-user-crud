@@ -4,7 +4,7 @@ import Profile from '../../Components/UserComponents/Profile/Profile'
 function ProfilePage() {
   return (
     <div>
-        <Profile/>
+      <Profile />
     </div>
   )
 }

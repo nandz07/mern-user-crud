@@ -39,7 +39,7 @@ function Header() {
                             </Nav.Link>
                         </Nav>
                         <Nav className="d-flex align-items-center">
-                        <Nav.Link >
+                            <Nav.Link >
                                 <img src={user.image} alt='hai' width='30px' />
                             </Nav.Link>
                             <Nav.Link ><Link

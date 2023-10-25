@@ -5,7 +5,7 @@ import axios from '../../utils/axios';
 import toast from 'react-hot-toast';
 import { adminPostLogin } from '../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
-
+import { motion } from 'framer-motion'
 
 function AdminLogin() {
     const navigate = useNavigate()
@@ -49,38 +49,48 @@ function AdminLogin() {
 
     return (
         <>
-            <div className='outer d-flex  justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
-                <Form className='border p-4 rounded'
-                    onSubmit={handleAdminLogin}
-                >
-                    <h2 className=''>Admin</h2>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="Enter email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </Form.Group>
+            <motion.div
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Group>
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+            >
 
-                    <div className="d-grid gap-2 mt-3">
-                        <Button variant="outline-dark" type='submit' >
-                            Login
-                        </Button>
-                    </div>
-                </Form>
-            </div>
+                <div className='outer d-flex  justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
+                    <Form className='border p-4 rounded'
+                        onSubmit={handleAdminLogin}
+                    >
+                        <h2 className=''>Admin</h2>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control
+                                type="email"
+                                placeholder="Enter email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </Form.Group>
+
+                        <div className="d-grid gap-2 mt-3">
+                            <Button variant="outline-dark" type='submit' >
+                                Login
+                            </Button>
+                        </div>
+                    </Form>
+                </div>
+            </motion.div>
+
         </>
     )
 }

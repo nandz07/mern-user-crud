@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import axios from '../../../utils/axios'
 import { signUpPost } from '../../../utils/Constants';
-
+import { motion } from 'framer-motion'
 
 function Signup() {
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ function Signup() {
                     toast.success('Registration successfully completed');
                     console.log(response.data);
                     navigate('/')
-                } else  {
+                } else {
                     toast.error(response.data.error);
                     console.log("some error")
                 }
@@ -56,61 +56,71 @@ function Signup() {
         }
     })
     return (
-        <div className='outer d-flex  justify-content-center align-items-center' style={{
-            minHeight: '100vh',
-        }}>
-            <Form className='border p-4  rounded'
-                onSubmit={handleSubmit}
-            >
-                <h2 className='text-white'>Sign Up</h2>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                        className='placeHolder'
-                        type="text"
-                        placeholder="Enter name"
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Enter email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
+        <motion.div
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Phone Number</Form.Label>
-                    <Form.Control
-                        type="number"
-                        placeholder="Phone number"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                    />
-                </Form.Group>
-                <div className="d-grid gap-2 mt-3">
-                    <Button type='submit' variant="outline-dark" >
-                        Register
-                    </Button>
-                    <Link to='/' className='link'>Already have an account</Link>
-                </div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
 
-            </Form>
-        </div>
+            <div className='outer d-flex  justify-content-center align-items-center' style={{
+                minHeight: '100vh',
+            }}>
+                <Form className='border p-4  rounded'
+                    onSubmit={handleSubmit}
+                >
+                    <h2 className='text-white'>Sign Up</h2>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                            className='placeHolder'
+                            type="text"
+                            placeholder="Enter name"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Phone Number</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="Phone number"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                        />
+                    </Form.Group>
+                    <div className="d-grid gap-2 mt-3">
+                        <Button type='submit' variant="outline-dark" >
+                            Register
+                        </Button>
+                        <Link to='/' className='link'>Already have an account</Link>
+                    </div>
+
+                </Form>
+            </div>
+        </motion.div>
     )
 }
 

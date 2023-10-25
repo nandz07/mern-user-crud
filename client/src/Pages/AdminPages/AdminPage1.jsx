@@ -4,9 +4,9 @@ import AdminLogin from '../../Components/AdminComponents/AdminLogin'
 function AdminPage1() {
   return (
     <div>
-        <Fragment>
-        <AdminLogin/>
-        </Fragment>
+      <Fragment>
+        <AdminLogin />
+      </Fragment>
     </div>
   )
 }

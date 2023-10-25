@@ -4,24 +4,25 @@ import Footer from '../Footer/Footer'
 import AdminHeader from '../Header/AdminHeader'
 import './AdminDash.css'
 import { Button, Card } from 'react-bootstrap'
-import {  useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from '../../../utils/axios';
 import { verifyAdminTokenn } from '../../../utils/Constants'
 import toast from 'react-hot-toast'
+import { motion } from 'framer-motion'
 
-function  AdminDash () {
+function AdminDash() {
     const navigate = useNavigate()
-    useEffect(()=>{
-        const token=localStorage.getItem('adminToken')
-        if(!token){
+    useEffect(() => {
+        const token = localStorage.getItem('adminToken')
+        if (!token) {
             navigate('/admin')
-        }else{
-            const body=JSON.stringify({token})
-            axios.post(verifyAdminTokenn,body,{headers:{"Content-Type":"application/json"}}).then((response)=>{
-                if(!response.data.token){
+        } else {
+            const body = JSON.stringify({ token })
+            axios.post(verifyAdminTokenn, body, { headers: { "Content-Type": "application/json" } }).then((response) => {
+                if (!response.data.token) {
                     toast.error(response.data.message)
                     navigate('/admin')
-                }else{
+                } else {
                     toast.success(response.data.message)
                 }
             })
@@ -30,22 +31,32 @@ function  AdminDash () {
     return (
         <>
             <Fragment >
+
                 <AdminHeader />
-                <div className='outer d-flex  justify-content-center align-items-center' style={{ minHeight: '80vh' }}>
+                <motion.div
 
-                    <Card className="card text-center" style={{ width: '50%', height: '40vh' }}>
-                        <Card.Header>Admin Dashboard</Card.Header>
-                        <Card.Body>
-                            <Card.Title>Welcome  </Card.Title>
-                            <Card.Text>
-                                Access Users details here
-                            </Card.Text>
-                            <Button variant="outline-secondary" onClick={() => navigate('/admin/users')} >Users</Button>
-                        </Card.Body>
-                        <Card.Footer className="text-muted">Yoy can update details in Users</Card.Footer>
-                    </Card>
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
 
-                </div>
+                    <div className='outer d-flex  justify-content-center align-items-center' style={{ minHeight: '80vh' }}>
+
+                        <Card className="card text-center" style={{ width: '50%', height: '40vh' }}>
+                            <Card.Header>Admin Dashboard</Card.Header>
+                            <Card.Body>
+                                <Card.Title>Welcome  </Card.Title>
+                                <Card.Text>
+                                    Access Users details here
+                                </Card.Text>
+                                <Button variant="outline-secondary" onClick={() => navigate('/admin/users')} >Users</Button>
+                            </Card.Body>
+                            <Card.Footer className="text-muted">Yoy can update details in Users</Card.Footer>
+                        </Card>
+
+                    </div>
+                </motion.div>
 
                 <Footer />
 
