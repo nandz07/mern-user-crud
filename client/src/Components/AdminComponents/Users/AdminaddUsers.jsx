@@ -24,11 +24,14 @@ function AdminaddUsers() {
 
         if (!userName.trim()) {
             toast.error('Name is required');
-        } else if (!email.trim()) {
+        }else
+        if (!email.trim()) {
             toast.error('Email is required');
-        } else if (!password.trim() && password.trim().length < 6) {
+        }else
+        if (!password.trim() || password.trim().length < 6) {
             toast.error('Password is required and should be at least 6 characters');
-        } else if (!phoneNumber.trim() && phoneNumber.length.trim() < 10) {
+        }else
+        if (!phoneNumber.trim() || phoneNumber.trim().length < 10) {
             toast.error('Phone number is required and should be at least 10 characters');
         } else {
             try {
@@ -55,11 +58,11 @@ function AdminaddUsers() {
                     toast.error(response.data.message)
                     navigate('/admin')
                 } else {
-                    toast.success(response.data.message)
+                    // toast.success(response.data.message)
                 }
             })
         }
-    })
+    },[navigate])
 
     return (
         <motion.div
