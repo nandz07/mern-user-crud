@@ -11,7 +11,7 @@ function Header() {
     const dispatch = useDispatch();
     const handleLogout = (e) => {
         e.preventDefault()
-        localStorage.clear();
+        localStorage.removeItem("token");
         dispatch(logout())
         navigate('/')
     }

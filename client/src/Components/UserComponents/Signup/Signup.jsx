@@ -21,11 +21,10 @@ function Signup() {
                 toast.error('Name is required');
             } else if (!email.trim()) {
                 toast.error('Email is required');
-            } else if (!password.trim() && password.trim().length < 6) {
+            } else if (password.trim().length < 6) {
                 toast.error('Password is required and should be at least 6 characters');
-            } else if (!phoneNumber.trim() && phoneNumber.length.trim() < 10) {
+            } else if (phoneNumber.trim().length < 10) {
                 toast.error('Phone number is required and should be at least 10 characters');
-                alert('hai')
             } else {
 
                 const body = JSON.stringify({
@@ -104,7 +103,7 @@ function Signup() {
                     />
                 </Form.Group>
                 <div className="d-grid gap-2 mt-3">
-                    <Button type='submit' variant="outline-light" >
+                    <Button type='submit' variant="outline-dark" >
                         Register
                     </Button>
                     <Link to='/' className='link'>Already have an account</Link>
